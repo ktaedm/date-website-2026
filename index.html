@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almaty Vibes | Идеи для встреч</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="text-2xl font-serif text-white/80 tracking-[0.2em] animate-pulse"></div>
+    </div>
+
+    <!-- Navigation (Simple Top Bar) -->
+    <nav class="fixed top-0 w-full z-40 p-6 mix-blend-difference text-white">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-xl font-bold font-serif tracking-widest">.</div>
+            <div class="text-xs uppercase tracking-widest opacity-70"></div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <div class="hero-bg" id="hero-bg"></div>
+        <div class="container mx-auto px-6 text-center z-10">
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight fade-in-up text-white font-serif" style="transition-delay: 0.1s;">
+                Сәлем Аяжан!
+            </h1>
+            <p class="text-gray-300 max-w-2xl mx-auto text-lg md:text-xl mb-12 fade-in-up leading-relaxed font-light" style="transition-delay: 0.2s;">
+                Я долго думал куда пойти и как предложить и вот что из этого вышло. Ниже представлены немногие идеи для нашей встречи, которые пришли мне в голову.
+            </p>
+            <div class="animate-bounce text-white/50 fade-in-up" style="transition-delay: 0.4s;">
+                <i class="fa-solid fa-arrow-down-long text-2xl"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- CATEGORIES SECTION -->
+    <section id="categories-section" class="py-24 bg-[#09090b] relative z-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-serif mb-16 text-center text-white/90">Выберите маршрут</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+
+                <!-- Card 1: Nature -->
+                <div class="category-card group" onclick="openCategory('nature')">
+                    <img src="photos/бао.jpg" alt="Природа">
+                    <div class="category-content">
+                        <span class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-2 block">01</span>
+                        <h3 class="text-3xl font-bold text-white mb-2">Природа</h3>
+                        <p class="text-gray-400 text-sm">Горы, озера и свежий воздух</p>
+                    </div>
+                </div>
+
+                <!-- Card 2: City -->
+                <div class="category-card group" onclick="openCategory('city')">
+                    <img src="photos/метро.jpeg" alt="Город">
+                    <div class="category-content">
+                        <span class="text-xs font-bold text-purple-400 uppercase tracking-widest mb-2 block">02</span>
+                        <h3 class="text-3xl font-bold text-white mb-2">Город</h3>
+                        <p class="text-gray-400 text-sm">Кофейни, улицы и огни</p>
+                    </div>
+                </div>
+
+                <!-- Card 3: Culture -->
+                <div class="category-card group" onclick="openCategory('culture')">
+                    <img src="photos/музей.jpg" alt="Культура">
+                    <div class="category-content">
+                        <span class="text-xs font-bold text-yellow-400 uppercase tracking-widest mb-2 block">03</span>
+                        <h3 class="text-3xl font-bold text-white mb-2">Культура</h3>
+                        <p class="text-gray-400 text-sm">Театры, музеи и история</p>
+                    </div>
+                </div>
+
+                <!-- Card 4: Arthouse -->
+                <div class="category-card group" onclick="openCategory('art')">
+                    <img src="photos/импровизация.jpg" alt="Артхаус">
+                    <div class="category-content">
+                        <span class="text-xs font-bold text-red-400 uppercase tracking-widest mb-2 block">04</span>
+                        <h3 class="text-3xl font-bold text-white mb-2">Артхаус</h3>
+                        <p class="text-gray-400 text-sm">Тишина, творчество и спонтанность</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- DETAILS OVERLAY (The "New Window") -->
+    <div id="details-overlay" class="details-overlay">
+        <!-- Close Button -->
+        <button class="close-btn" onclick="closeOverlay()">
+            <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+
+        <!-- Overlay Hero -->
+        <div class="relative h-[40vh] w-full overflow-hidden">
+            <div class="absolute inset-0 bg-black/60 z-10"></div>
+            <img id="overlay-hero-img" src="" alt="" class="absolute inset-0 w-full h-full object-cover grayscale opacity-70">
+            <div class="absolute inset-0 flex items-end justify-start p-6 md:p-20 z-20">
+                <div>
+                    <span id="overlay-subtitle" class="text-teal-400 uppercase tracking-[0.3em] text-sm block mb-4">Категория</span>
+                    <h2 id="overlay-title" class="text-5xl md:text-7xl font-bold text-white font-serif">Заголовок</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content List -->
+        <div class="container mx-auto px-6 py-20">
+            <div id="items-container" class="max-w-5xl mx-auto">
+                <!-- Items injected here -->
+            </div>
+
+            <!-- Bottom Navigation Hint -->
+            <div class="text-center mt-20 opacity-50">
+                <p class="text-sm uppercase tracking-widest mb-4">Больше идей в других разделах</p>
+                <button onclick="closeOverlay()" class="text-white border-b border-white/30 hover:border-white pb-1 transition-colors">Вернуться назад</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JavaScript logic -->
+    <script>
+        // --- DATA ---
+        const data = {
+            nature: {
+                title: "Природа",
+                heroImage: "photos/бао.jpg",
+                items: [
+                    {
+                        title: "Медеу и Апа Катя",
+                        desc: "Поднимаемся по лестнице здоровья, идем по асфальтированной дороге до террасы Апа Катя. Пьем теплый чай, перекусываем и любуемся видами гор.",
+                        image: "photos/медеу.jpg",
+                        location: "Медеу"
+                    },
+                    {
+                        title: "БАО (Большое Алматинское)",
+                        desc: "Рано утром доезжаем до чекпойнта, идем пешком до самого озера. Бирюзовая вода, горы и тишина. Идеально для пикника с горячим чаем.",
+                        image: "photos/бао.jpg",
+                        location: "БАО"
+                    },
+                    {
+                        title: "Коктобе (Закат)",
+                        desc: "Пеший подъем ближе к вечеру. Вид на город, горы и знаменитую телебашню. Закат будет вообще тема.",
+                        image: "photos/коктобе.jpg",
+                        location: "Коктобе"
+                    },
+                    {
+                        title: "Центральный парк",
+                        desc: "Классическая прогулка. Озеро, старые деревья, спокойствие. Просто гуляем и разговариваем.",
+                        image: "photos/парк.jpg",
+                        location: "Парк Горького"
+                    }
+                ]
+            },
+            city: {
+                title: "Город",
+                heroImage: "photos/метро.jpeg",
+                items: [
+                    {
+                        title: "Чеклист по кофейням",
+                        desc: "Тур по кофейням города. В каждой пробуем что-то новое. Особый бонус! можем сидеть решать интегралы)",
+                        image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=800&auto=format&fit=crop",
+                        location: "Центр"
+                    },
+                    {
+                        title: "Тур по Метро",
+                        desc: "Бесцельно прокатиться по станциям метро. Рассматриваем люстры, мозаику и просто наслаждаемся поездкой до конечной.",
+                        image: "photos/метро.jpeg",
+                        location: "Метрополитен"
+                    },
+                    {
+                        title: "10 000 Шагов",
+                        desc: "Ставим цель по шагам и гуляем по вечернему городу, пока не выполним план. Греемся в случайных кафе.",
+                        image: "photos/шаги.jpg",
+                        location: "Улицы Алматы"
+                    }
+                ]
+            },
+            culture: {
+                title: "Культура",
+                heroImage: "photos/музей.jpg",
+                items: [
+                    {
+                        title: "Музей Искусств",
+                        desc: "Новый музей на Аль-Фараби — Назарбаева. Современная архитектура, интересные экспонаты и эстетика.",
+                        image: "photos/музей.jpg",
+                        location: "Аль-Фараби"
+                    },
+                    {
+                        title: "Театр или Кино",
+                        desc: "Смотрим пьесу или фильм и самое интересное — обсуждаем увиденное после сеанса за прогулкой или едой.",
+                        image: "photos/кино.jpg",
+                        location: "Город"
+                    },
+                    {
+                        title: "Ролики в Халык Арене",
+                        desc: "Катаемся на роликах (похоже на каток кстати). Весело, активно, но не уверен что умею кататься.",
+                        image: "photos/ролики.jpg",
+                        location: "Halyk Arena"
+                    }
+                ]
+            },
+            art: {
+                title: "Артхаус",
+                heroImage: "photos/импровизация.jpg",
+                items: [
+                    {
+                        title: "Тишина (15 минут)",
+                        desc: "Находим скамейку и молчим ровно 15 минут. Наблюдаем за окружением и людьми без слов.",
+                        image: "photos/молчание.jpg",
+                        location: "Где угодно"
+                    },
+                    {
+                        title: "DIY / Рисование",
+                        desc: "Коворкинг или кафе. Рисуем, пишем, творим собственными руками из говна и палок.",
+                        image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800&auto=format&fit=crop",
+                        location: "Арт-пространство"
+                    },
+                    {
+                        title: "Без плана",
+                        desc: "Встречаемся и решаем что делать прямо на месте. Никаких заготовок, только импровизация.",
+                        image: "photos/импровизация.jpg",
+                        location: "Спонтанность"
+                    }
+                ]
+            }
+        };
+
+        // --- DOM ELEMENTS ---
+        const overlay = document.getElementById('details-overlay');
+        const itemsContainer = document.getElementById('items-container');
+        const overlayTitle = document.getElementById('overlay-title');
+        const overlayHeroImg = document.getElementById('overlay-hero-img');
+        const loader = document.getElementById('loader');
+
+        // --- FUNCTIONS ---
+
+        function openCategory(key) {
+            const category = data[key];
+
+            // Set Header Info
+            overlayTitle.textContent = category.title;
+            overlayHeroImg.src = category.heroImage;
+
+            // Clear and Populate Items
+            itemsContainer.innerHTML = '';
+
+            category.items.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                card.style.transitionDelay = `${index * 0.1 + 0.3}s`; // Stagger effect
+
+                card.innerHTML = `
+                    <div class="item-image relative overflow-hidden group">
+                        <img src="${item.image}" alt="${item.title}" class="transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute top-4 left-4 bg-black/60 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-white uppercase tracking-wider">
+                            <i class="fa-solid fa-location-dot mr-1 text-teal-400"></i> ${item.location}
+                        </div>
+                    </div>
+                    <div class="item-content p-8 flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold text-white mb-4 font-serif">${item.title}</h3>
+                        <p class="text-gray-400 leading-relaxed text-sm md:text-base mb-6 border-l-2 border-teal-500 pl-4">
+                            ${item.desc}
+                        </p>
+                    </div>
+                `;
+                itemsContainer.appendChild(card);
+            });
+
+            // Show Overlay
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Lock main scroll
+
+            // Trigger animations for items after overlay opens
+            setTimeout(() => {
+                const cards = itemsContainer.querySelectorAll('.item-card');
+                cards.forEach(c => c.classList.add('visible'));
+            }, 100);
+        }
+
+        function closeOverlay() {
+            overlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scroll
+
+            // Reset item animations for next time
+            setTimeout(() => {
+                itemsContainer.innerHTML = '';
+            }, 500);
+        }
+
+        // --- INIT ---
+        window.addEventListener('load', () => {
+            // Hide Loader
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 600);
+
+            // Hero Parallax
+            window.addEventListener('scroll', () => {
+                const scrolled = window.scrollY;
+                const heroBg = document.getElementById('hero-bg');
+                if (scrolled < window.innerHeight) {
+                    heroBg.style.transform = `translateY(${scrolled * 0.4}px)`;
+                }
+            });
+
+            // Intersection Observer for Main Page elements
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
